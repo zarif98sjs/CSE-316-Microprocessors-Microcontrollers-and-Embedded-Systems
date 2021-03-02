@@ -129,7 +129,7 @@ MAIN PROC
     MOV Z,AL 
     
     ;print string
-    LEA DX, OP2
+    LEA DX, OP3
     MOV AH, 9
     INT 21H
     
@@ -141,7 +141,32 @@ MAIN PROC
     ; OUTPUT string
     LEA DX, NEWLINE ;DX : USED IN IO and MUL,DIV
     MOV AH,9 ; AH,9 used for character string output
+    INT 21H 
+    
+    
+;OPERATION 4 : Z = Y-X+1
+
+    MOV AL,Y
+    SUB AL,X
+    ADD AL,1 
+    ADD AL,30H
+    MOV Z,AL 
+    
+    ;print string
+    LEA DX, OP4
+    MOV AH, 9
     INT 21H
+    
+    ;display Z  
+    MOV AH, 2
+    MOV DL, Z
+    INT 21H
+    
+    ; OUTPUT string
+    LEA DX, NEWLINE ;DX : USED IN IO and MUL,DIV
+    MOV AH,9 ; AH,9 used for character string output
+    INT 21H    
+
     
     
 ;DOS EXIT
