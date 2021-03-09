@@ -144,11 +144,24 @@ IF_2:
 IF_3:
     MOV AL,Z
     CMP AL,MX2
-    JNG DISPLAY
+    JNG IF_4
     
                 ; Z > MX2
     MOV AL,Z
     MOV MX2,AL
+    JMP DISPLAY
+    
+IF_4:
+    ; Z < MX2 , now we need to check if MX1 are MX2 are same , in that case MX2 is Z
+    MOV AL,MX1
+    CMP AL,MX2
+    JE  TWO_MAX_SAME
+    
+    JMP DISPLAY
+    
+TWO_MAX_SAME:
+    MOV AL,Z
+    MOV MX2,AL ; Z is the MX2
     JMP DISPLAY
     
 DISPLAY_ALL_EQUAL:
