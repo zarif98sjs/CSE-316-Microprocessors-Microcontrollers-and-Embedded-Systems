@@ -13,6 +13,9 @@
     PROMPT1 DB 'First Number = ? $'  
     PROMPT2 DB 'Second Number = ? $'   
     PROMPT3 DB 'Thrid Number = ? $'
+    
+    OPT1 DB 'All the numbers are equal $'
+    OPT2 DB 'Second Maximum Number = $'
 
     X DB ?
     Y DB ?
@@ -89,9 +92,21 @@ MAIN PROC
     LEA DX, NEWLINE 
     MOV AH,9 
     INT 21H
+    
+    
+IS_ALL_EQ:
+
+    MOV AL,X
+    CMP AL,Y
+    JNE IF_1
+    
+    CMP AL,Z
+    JNE IF_1
+    
+    JMP DISPLAY_ALL_EQUAL
 
                 
-;OPERATION 1 
+;OPERATION  
 
 IF_1:
     MOV AL,X    
@@ -134,14 +149,22 @@ IF_3:
                 ; Z > MX2
     MOV AL,Z
     MOV MX2,AL
-    JMP DISPLAY 
+    JMP DISPLAY
     
-               
+DISPLAY_ALL_EQUAL:
+
+    ;print string
+    LEA DX, OPT1
+    MOV AH, 9
+    INT 21H
+
+    JMP EXIT
+        
+                
 DISPLAY:
-;display Z  
-    MOV AH, 2  
-    ADD MX1,30H
-    MOV DL, MX1 
+    ;print string
+    LEA DX, OPT2
+    MOV AH, 9
     INT 21H
                   
                   
@@ -150,11 +173,12 @@ DISPLAY:
     ADD MX2,30H
     MOV DL, MX2
     INT 21H
+    JMP EXIT
 
-
-;DOS EXIT
-MOV AH, 4CH
-INT 21H
+EXIT:
+    ;DOS EXIT
+    MOV AH, 4CH
+    INT 21H
 
 MAIN ENDP
 END MAIN
