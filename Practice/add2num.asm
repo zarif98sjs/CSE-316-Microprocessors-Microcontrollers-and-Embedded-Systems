@@ -48,8 +48,8 @@ MAIN PROC
     
     
     ;display the lower case character  
+    MOV DL, NUM1   
     MOV AH, 2
-    MOV DL, NUM1
     INT 21H
     
     ;display the lower case character  
