@@ -18,7 +18,13 @@
     GUN DW ?
     
     TEMP DW ?
-    DG DW ?
+    FOR_PRINT DW ?
+    DG DW ? 
+    
+    DIV_RES DW ?
+    DIV_REM DW ?
+    
+    MARKER DW 0DH
     
 
 .CODE
@@ -34,15 +40,27 @@ MAIN PROC
     MOV AH, 9
     INT 21H
     
-    CALL INPUT
-    
+    ; INPUT X
+    CALL INPUT 
     MOV BX , TEMP
-    MOV X , BX
+    MOV X , BX 
     
-    CALL INPUT
+       
+    ; OUTPUT X
+    MOV BX , X
+    MOV FOR_PRINT, BX
+    CALL OUTPUT
     
+    ; INPUT Y
+    CALL INPUT 
     MOV BX , TEMP
-    MOV Y , BX     
+    MOV Y , BX
+    
+    
+    ; OUTPUT Y
+    MOV BX , Y
+    MOV FOR_PRINT, BX
+    CALL OUTPUT     
     
 EXIT:
     ;DOS EXIT
@@ -98,12 +116,72 @@ INPUT PROC
         
         
     EXIT_INPUT:
-       
-     
         RET
         
 INPUT ENDP
-                
+
+
+OUTPUT PROC
+               
+        MOV CX , MARKER     
+        PUSH CX ; marker
+    
+
+    OUTPUT_LOOP:
+    
+        ;MOV AH, 1
+        ;INT 21H
+        
+        MOV AX , FOR_PRINT
+        CWD
+        MOV BX , 10D
+        IDIV BX ; QUOTIENT : AX  , REMAINDER : DX     
+        
+        MOV FOR_PRINT , AX
+    
+        MOV DIV_RES , AX
+        MOV DIV_REM , DX 
+        
+        PUSH DX
+        
+        CMP AX , 0H
+        JNE OUTPUT_LOOP
+        
+        
+        LEA DX, NEWLINE ; DX : USED IN IO and MUL,DIV
+        MOV AH, 9 ; AH,9 used for character string output
+        INT 21H;
+            
+        
+    OP_STACK_PRINT:
+    
+        ;MOV AH, 1
+        ;INT 21H
+    
+        POP BX
+        
+        CMP BX , MARKER
+        JE EXIT_OUTPUT
+        
+       
+        MOV AH, 2
+        MOV DX, BX ; stored in DL for display 
+        ADD DX , 30H
+        INT 21H
+        
+        JMP OP_STACK_PRINT
+
+    EXIT_OUTPUT:
+    
+        LEA DX, NEWLINE ; DX : USED IN IO and MUL,DIV
+        MOV AH, 9 ; AH,9 used for character string output
+        INT 21H;
+
+        ;POP CX 
+    
+        RET     
+      
+OUTPUT ENDP
                 
 
 END MAIN
