@@ -10,7 +10,7 @@
     
     NEWLINE DB CR, LF , '$'  
     
-    PROMPT1 DB 'Enter Your Password $' 
+    PROMPT1 DB 'Enter Your Password : $' 
     
     OPT1 DB 'Valid password $'
     OPT2 DB 'Invalid password $' 
@@ -86,23 +86,23 @@ IF_1:
     MOV AH,9 
     INT 21H
 
-    ;display Z  
-    MOV AH, 2 
-    MOV DL, LO
-    ADD DL,30H
-    INT 21H
+    ;display LO  
+    ;MOV AH, 2 
+    ;MOV DL, LO
+    ;ADD DL,30H
+    ;INT 21H
     
-    ;display Z  
-    MOV AH, 2 
-    MOV DL, HI
-    ADD DL,30H
-    INT 21H
+    ;display HI  
+    ;MOV AH, 2 
+    ;MOV DL, HI
+    ;ADD DL,30H
+    ;INT 21H
     
-    ;display Z  
-    MOV AH, 2 
-    MOV DL, DG
-    ADD DL,30H
-    INT 21H
+    ;display DG  
+    ;MOV AH, 2 
+    ;MOV DL, DG
+    ;ADD DL,30H
+    ;INT 21H
     
     MOV AL,LO
     CMP AL,1H
