@@ -18,4 +18,4 @@
   
     **Assembly 8086** **`Arithmetic Logic instructions , Stack & Procedures`**
    - [Problem Statement](/Offline/Offline%203/Offline_3_Specification.pdf)
-   - [Solution Problem](/Offline/Offline%203/problem.asm) (integer operations : `add` `subtraction` `multiplication` `division`)
+   - [Solution Problem](/Offline/Offline%203/problem.asm) (signed integer arithmetic operations : `add` `subtraction` `multiplication` `division`)
