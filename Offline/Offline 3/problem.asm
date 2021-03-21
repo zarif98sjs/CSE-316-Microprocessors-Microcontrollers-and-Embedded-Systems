@@ -18,7 +18,6 @@
 
     WRONG DB 'Wrong operator$'
     
-
     X DW ?
     Y DW ?
     RES DW ? 
@@ -54,7 +53,7 @@ MAIN PROC
     MOV BX , TEMP
     MOV X , BX 
 
-    ; OUTPUT X
+    ;OUTPUT X
     ;MOV BX , X
     ;MOV FOR_PRINT, BX
     ;CALL OUTPUT
@@ -149,7 +148,6 @@ SUB_BLOCK:
 
     CALL SUB_INT 
     JMP EXIT
-    
 MUL_BLOCK:
 
     CALL MUL_INT
@@ -254,12 +252,10 @@ INPUT PROC
         ;MOV DX, BX ; stored in DL for display 
         ;INT 21H
         
-        
         ;LEA DX, NEWLINE ; DX : USED IN IO and MUL,DIV
         ;MOV AH, 9 ; AH,9 used for character string output
         ;INT 21H;
             
-
         JMP INPUT_LOOP
         
     MINUS:
@@ -273,9 +269,7 @@ INPUT PROC
         ADD AX , 1H
         MOV TEMP , AX
         
-        
     EXIT_INPUT:
-    
     
         RET
         
@@ -304,9 +298,9 @@ OUTPUT PROC
         ;INT 21H
         
         MOV AX , FOR_PRINT
-        CWD
+        XOR DX,DX
         MOV BX , 10D
-        IDIV BX ; QUOTIENT : AX  , REMAINDER : DX     
+        DIV BX ; QUOTIENT : AX  , REMAINDER : DX     
         
         MOV FOR_PRINT , AX
     
@@ -318,12 +312,10 @@ OUTPUT PROC
         CMP AX , 0H
         JNE OUTPUT_LOOP
         
-        
         ;LEA DX, NEWLINE ; DX : USED IN IO and MUL,DIV
         ;MOV AH, 9 ; AH,9 used for character string output
         ;INT 21H;
-        
-    
+
         MOV AL , IS_NEG
         CMP AL , 1H
         JNE OP_STACK_PRINT
@@ -353,8 +345,6 @@ OUTPUT PROC
 
     EXIT_OUTPUT:
     
-
-
         ;POP CX 
     
         RET     
