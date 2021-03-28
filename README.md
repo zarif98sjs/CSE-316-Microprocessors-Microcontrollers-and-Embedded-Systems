@@ -25,4 +25,4 @@
     **Assembly 8086** **`Arrays and Recursion`**
    - [Problem Statement](/Offline/Offline%204/Offline_4_Specification.pdf)
    - [Solution Problem](/Offline/Offline%204/problem1.asm) ( 2x2 `array sum`)
-   - [Solution Problem](/Offline/Offline%204/proble2.asm) ( `fibonacci` series using `recursion`)
+   - [Solution Problem](/Offline/Offline%204/problem2.asm) ( `fibonacci` series using `recursion`)
