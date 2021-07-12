@@ -100,7 +100,7 @@ FIBONACCI PROC NEAR
     
     JG END_IF
 
-    MOV AX,[BP+4]    ;BASE CASE : if( n<=1 ) return n
+    MOV AX,[BP+4]    ; BASE CASE : if( n<=1 ) return n
     JMP RETURN
 
 END_IF:
@@ -121,8 +121,8 @@ END_IF:
     
     CALL FIBONACCI
     
-    POP BX
-    ADD AX,BX
+    POP BX          ; get saved RES1 from stack
+    ADD AX,BX       ; RES1 + RES2
 
 RETURN:
     POP BP

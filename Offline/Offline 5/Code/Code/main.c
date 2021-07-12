@@ -55,7 +55,6 @@ int main(void)
 		else
 		{
 			// rotate
-					
 			for(int count = 0; count<10; count++)
 			{
 				for(int i=0;i<nc;i++){

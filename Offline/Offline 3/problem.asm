@@ -389,7 +389,7 @@ DIV_INT PROC
         CWD
         MOV BX , Y
         
-        IDIV BX ; Y / X
+        IDIV BX ; X / Y
         MOV RES , AX
        
         RET
